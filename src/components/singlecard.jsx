@@ -21,7 +21,7 @@ const Singlecard = ({volun}) => {
            <figure><img src={image} className="w-[400px] h-[250px] object-cover" alt="Shoes" /></figure>
           <div className="card-body">
         <h2 className="card-title">{title.length > 20 ? title.substring(0,20) +"..." : title}</h2>
-        <p>{Description.length > 60 ? Description.substring(0,60) + "..." : Description}</p>
+        {/* <p>{Description.length > 60 ? Description.substring(0,60) + "..." : Description}</p> */}
         <div className="flex justify-between text-[18px]">
             <span className="bg-blue-200 text-blue-800 text-xs px-4 py-2 rounded-lg w-[40%]">Category: {Category}</span>
             <span className= "text-red-800 bg-red-200 px-3 py-1 rounded-lg">Deadline:{Deadline}</span>

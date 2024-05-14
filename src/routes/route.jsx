@@ -4,6 +4,8 @@ import Home from "../pages/home";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import Carddetails from "../pages/carddetails";
+import Addvolunteer from "../pages/addvolunteer";
+import Errorpage from "../pages/errorpage";
 
 
 const Route = createBrowserRouter([
@@ -11,6 +13,7 @@ const Route = createBrowserRouter([
     {
         path:'/',
         element:<Root></Root>,
+        errorElement:<Errorpage></Errorpage>,
         children:[
             {
             index:true,
@@ -30,6 +33,10 @@ const Route = createBrowserRouter([
             element:<Carddetails></Carddetails>,
             loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
             },
+            {
+                path:'/add-volunteer',
+                element:<Addvolunteer></Addvolunteer>
+            }
 
     
     ]

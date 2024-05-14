@@ -53,11 +53,11 @@ const Header = () => {
       </div>
       <ul tabIndex={0} className="mt-3 z-[50] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
         <li>
-          <a className="justify-between">
-            Profile
-          </a>
+          <Link to={'/add-volunteer'} className="justify-between">
+            Add Volunteer Post
+          </Link>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to={'/my-post'}>Manage My Post</Link></li>
         <li><button onClick={logOut}>
           Logout
           </button></li>

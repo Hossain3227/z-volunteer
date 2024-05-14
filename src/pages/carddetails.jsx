@@ -1,12 +1,63 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
 const Carddetails = () => {
     
     const {user} = useContext(AuthContext)
     const volun = useLoaderData()
+
+    const [showModal, setShowModal] = useState(false);
+  
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const form = e.target
+    const requestId = _id
+    const suggestion = form.suggestion.value 
+    const email = user?.email
+
+    if(user?.email === Organizer_email)
+      return toast.error('action not permitted')
+
+    const status = 'requested'
+    
+
+    const requestData = {
+        requestId,
+        suggestion,
+        email,
+        status,
+        Organizer_email,
+        Category,
+        Deadline,
+        title,
+        volunteer_needed,
+    }
+
+    try{
+        const {data} = await axios.post('http://localhost:5000/requests',requestData)
+        console.log(data);
+    } catch(err){
+        console.log(err);
+    }
+    console.table(requestData);
+    // console.log(typeof(volunteer_needed));
+
+    
+    closeModal();
+  };
 
     const {_id,
         image,
@@ -42,8 +93,67 @@ const Carddetails = () => {
         </div>
         <div className="card-actions">
 
-            <button className="btn btn-primary"> Be a volunteer</button>
+            <button onClick={openModal} className="btn btn-primary"> Be a volunteer</button>
         </div>
+
+        {/* volunteer form modal */}
+
+        {showModal && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg">
+            <h2 className="text-2xl mb-4">Volunteer Information Form</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>Category: </label>
+                <input
+                  type="text"
+                  defaultValue={Category}
+                  disabled
+                />
+              </div>
+              <div>
+                <label>Email: </label>
+                <input
+                  type="email"
+                  name="email"
+                  defaultValue={user?.email} 
+                  disabled
+                />
+              </div>
+              <div>
+                <label>Suggestions: </label>
+                <input
+                  name="suggestion"
+                  type="text"
+                  required
+                ></input>
+              </div>
+              <div>
+                <label className="" htmlFor="status">Status: </label>
+                <select
+                  defaultValue={status}
+                  name="status"
+                  required
+                >
+                  <option value="Requested">Requested</option>
+                </select>
+              </div>
+              <div className="mt-4 flex justify-end">
+                <button
+                  type="button"
+                  className="btn btn-secondary mr-2"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Request
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
             </div>
             
         </div>
