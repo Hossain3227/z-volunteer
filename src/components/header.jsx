@@ -58,6 +58,7 @@ const Header = () => {
           </Link>
         </li>
         <li><Link to={'/my-post'}>Manage My Post</Link></li>
+        <li><Link to={'/my-req'}>my volunter requests</Link></li>
         <li><button onClick={logOut}>
           Logout
           </button></li>

@@ -9,6 +9,8 @@ import Errorpage from "../pages/errorpage";
 import Allcard from "../pages/allcard";
 import Mypost from "../pages/mypost";
 import Updatevolunter from "../pages/updatevolunter";
+import Privateroute from "./privateroute";
+import Myvolunterreq from "../pages/myvolunterreq";
 
 
 const Route = createBrowserRouter([
@@ -33,28 +35,32 @@ const Route = createBrowserRouter([
             },
             {
             path:'/volunteer/:id',
-            element:<Carddetails></Carddetails>,
+            element:<Privateroute><Carddetails></Carddetails></Privateroute>,
             loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
             },
             {
             path:'/update/:id',
-            element:<Updatevolunter></Updatevolunter>,
+            element:<Privateroute><Updatevolunter></Updatevolunter></Privateroute>,
             loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
             },
             
             {
                 path:'/add-volunteer',
-                element:<Addvolunteer></Addvolunteer>
+                element:<Privateroute><Addvolunteer></Addvolunteer></Privateroute>
             },
             {
                 path:'/allcard',
-                element:<Allcard></Allcard>,
+                element:<Privateroute><Allcard></Allcard></Privateroute>,
                 loader: () => fetch('http://localhost:5000/volunteer')
             },
             {
                 path:'/my-post',
                 element:<Mypost></Mypost>
-            }
+            },
+            {
+                path:'/my-req',
+                element:<Myvolunterreq></Myvolunterreq>
+            },
 
     
     ]
