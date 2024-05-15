@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 const Mypost = () => {
@@ -9,20 +11,38 @@ const Mypost = () => {
     const [volunter, setvolunteer] = useState([])
 
     useEffect( () =>{
-        if(user?.email){
-          const getData = async () => {
-            console.log(user?.email);
-            const {data} = await axios(`http://localhost:5000/volunteers/${user?.email}`)
-            setvolunteer(data)
-    
-        }
-
+        
         getData()
-        }
 
     },[user])
 
+    // if(user?.email){
+    
+    //   }
+
+    const getData = async () => {
+      console.log(user?.email);
+      const {data} = await axios(`http://localhost:5000/volunteers/${user?.email}`)
+      setvolunteer(data)
+
+  }
+
     console.log(volunter);
+
+
+    const handleDelete = async id => {
+      try {
+        const { data } = await axios.delete(`http://localhost:5000/volunteer/${id}`)
+        console.log(data)
+        toast.success('Deleted')
+  
+        
+        getData()
+      } catch (err) {
+        console.log(err.message)
+        toast.error(err.message)
+      }
+    }
     
     return (
         <div>
@@ -75,7 +95,8 @@ const Mypost = () => {
           <td>{vol.Category}</td>
 
           <th>
-            <button className="btn btn-ghost btn-xs">details</button>
+            <Link to={`/update/${vol._id}`} className="btn btn-ghost btn-xs">update</Link>
+            <button onClick={() => handleDelete(vol._id)} className="btn">Delete</button>
           </th>
         </tr>
         )

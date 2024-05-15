@@ -8,6 +8,7 @@ import Addvolunteer from "../pages/addvolunteer";
 import Errorpage from "../pages/errorpage";
 import Allcard from "../pages/allcard";
 import Mypost from "../pages/mypost";
+import Updatevolunter from "../pages/updatevolunter";
 
 
 const Route = createBrowserRouter([
@@ -35,6 +36,12 @@ const Route = createBrowserRouter([
             element:<Carddetails></Carddetails>,
             loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
             },
+            {
+            path:'/update/:id',
+            element:<Updatevolunter></Updatevolunter>,
+            loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
+            },
+            
             {
                 path:'/add-volunteer',
                 element:<Addvolunteer></Addvolunteer>
