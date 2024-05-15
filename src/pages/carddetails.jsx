@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ const Carddetails = () => {
     
     const {user} = useContext(AuthContext)
     const volun = useLoaderData()
+    const navigate = useNavigate()
 
     const [showModal, setShowModal] = useState(false);
   
@@ -51,8 +52,11 @@ const Carddetails = () => {
     try{
         const {data} = await axios.post('http://localhost:5000/requests',requestData)
         console.log(data);
+        toast.success('requested')
+        navigate('/my-req')
     } catch(err){
         console.log(err);
+        toast.error('failed')
     }
     console.table(requestData);
     // console.log(typeof(volunteer_needed));

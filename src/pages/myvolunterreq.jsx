@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 
 const Myvolunterreq = () => {
     
+   
     const {user} = useContext(AuthContext)
     const [request, setrequest] = useState([])
+
 
     useEffect( () =>{
         
@@ -24,6 +25,21 @@ const Myvolunterreq = () => {
       const {data} = await axios(`http://localhost:5000/all-reqs/${user?.email}`)
       setrequest(data)
 
+  }
+
+
+  const handleCancel = async id => {
+    try {
+      
+      const { data } = await axios.delete(`http://localhost:5000/requests/${id}`)
+      console.log(data)
+      toast.success('Deleted')
+      
+      getData()
+    } catch (err) {
+      console.log(err.message)
+      toast.error(err.message)
+    }
   }
     
     return (
@@ -77,8 +93,8 @@ const Myvolunterreq = () => {
           <td>{vol.Category}</td>
 
           <th>
-            <Link to={`/update/${vol._id}`} className="btn btn-ghost btn-xs">update</Link>
-            <button  className="btn">Delete</button>
+            
+            <button onClick={() => handleCancel(vol._id)} className="btn">Cancel</button>
           </th>
         </tr>
         )
