@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import Banner from "../components/banner";
 import Cardsection from "../components/cardsection";
+import Gotoall from "../components/gotoall";
 
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Cardsection volunteer={volunteer}></Cardsection>
+            <Gotoall></Gotoall>
         </div>
     );
 };

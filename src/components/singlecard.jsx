@@ -24,7 +24,7 @@ const Singlecard = ({volun}) => {
         {/* <p>{Description.length > 60 ? Description.substring(0,60) + "..." : Description}</p> */}
         <div className="flex justify-between text-[18px]">
             <span className="bg-blue-200 text-blue-800 text-xs px-4 py-2 rounded-lg w-[40%]">Category: {Category}</span>
-            <span className= "text-red-800 bg-red-200 px-3 py-1 rounded-lg">Deadline:{Deadline}</span>
+            <span className= "text-red-800 bg-red-200 px-3 py-1 rounded-lg">Deadline:{new Date(Deadline).toLocaleDateString()}</span>
         </div>
         <div className="card-actions">
       <Link to={`/volunteer/${_id}`} className="btn btn-primary">View Details</Link>

@@ -15,6 +15,8 @@ const Cardsection = ({volunteer}) => {
 //     getData()
 //   }, [])
 
+   const svolunteer = volunteer.slice(0,6);
+
     return (
         <div className="my-12">
 
@@ -25,7 +27,7 @@ const Cardsection = ({volunteer}) => {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6">
             {
-                volunteer.map(volun => (
+                svolunteer.map(volun => (
                     <Singlecard key={volun._id} volun={volun}></Singlecard>
                 )
 

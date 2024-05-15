@@ -28,7 +28,7 @@ const Carddetails = () => {
     const suggestion = form.suggestion.value 
     const email = user?.email
 
-    if(user?.email === Organizer_email)
+    if(user?.email === Organizer?.email)
       return toast.error('action not permitted')
 
     const status = 'requested'
@@ -38,12 +38,14 @@ const Carddetails = () => {
         requestId,
         suggestion,
         email,
+        image,
         status,
-        Organizer_email,
+        Organizer,
         Category,
         Deadline,
         title,
         volunteer_needed,
+        Organizer_email:Organizer?.email,    
     }
 
     try{
@@ -69,6 +71,7 @@ const Carddetails = () => {
         Deadline,
         Organizer_name,
         Organizer_email,
+        Organizer,
         } = volun || {};
 
     return (
@@ -76,7 +79,15 @@ const Carddetails = () => {
 
             <div className="md:w-1/2 w-full p-4">
              <img className="rounded-lg" src={image} alt="" />
+
+             <div className=" mt-4 flex items-center justify-between">
+              <p className="text-[18px] ">Email: {Organizer?.email}</p>
+              <div className="rounded-full object-cover w-14 h-14">
+                <img className="rounded-full" src={Organizer?.photo} alt="" />
+              </div>
             </div>
+            </div>
+            
             <div className="md:w-1/2 w-full p-4">
                 <h2 className="text-4xl mb-4"> Volunteer details: </h2>
                 <h2 className="text-2xl mb-2">Title: {title}</h2>
@@ -89,8 +100,10 @@ const Carddetails = () => {
                 
                 <div className="flex justify-between text-[18px] mb-4">
             <span className="bg-blue-200 text-blue-800 text-xs px-4 py-2 rounded-lg w-[40%]">Category: {Category}</span>
-            <span className= "text-red-800 bg-red-200 px-3 py-1 rounded-lg">Deadline:{Deadline}</span>
+            <span className= "text-red-800 bg-red-200 px-3 py-1 rounded-lg">Deadline:{new Date(Deadline).toLocaleDateString()}</span>
         </div>
+
+
         <div className="card-actions">
 
             <button onClick={openModal} className="btn btn-primary"> Be a volunteer</button>
