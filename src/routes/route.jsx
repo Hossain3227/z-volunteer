@@ -23,7 +23,7 @@ const Route = createBrowserRouter([
             {
             index:true,
             element:<Home></Home>,
-            loader: () => fetch('http://localhost:5000/volunteer'),
+            loader: () => fetch('https://volunteer-server-beta.vercel.app/volunteer'),
             },
             {
             path:'/login',
@@ -36,12 +36,12 @@ const Route = createBrowserRouter([
             {
             path:'/volunteer/:id',
             element:<Privateroute><Carddetails></Carddetails></Privateroute>,
-            loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
+            loader: ({params}) => fetch(`https://volunteer-server-beta.vercel.app/volunteer/${params.id}`)
             },
             {
             path:'/update/:id',
             element:<Privateroute><Updatevolunter></Updatevolunter></Privateroute>,
-            loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`)
+            loader: ({params}) => fetch(`https://volunteer-server-beta.vercel.app/volunteer/${params.id}`)
             },
             
             {
@@ -51,7 +51,7 @@ const Route = createBrowserRouter([
             {
                 path:'/allcard',
                 element:<Privateroute><Allcard></Allcard></Privateroute>,
-                loader: () => fetch('http://localhost:5000/volunteer')
+                loader: () => fetch('https://volunteer-server-beta.vercel.app/volunteer')
             },
             {
                 path:'/my-post',

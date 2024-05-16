@@ -9,7 +9,7 @@ const Cardsection = ({volunteer}) => {
 //     const [volunteer, setVolunTeers] = useState([])
 //   useEffect(() => {
 //     const getData = async () => {
-//       const { data } = await axios('http://localhost:5000/volunteer')
+//       const { data } = await axios('https://volunteer-server-beta.vercel.app/volunteer')
 //       setVolunTeers(data)
 //     }
 //     getData()

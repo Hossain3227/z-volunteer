@@ -18,7 +18,7 @@ const Allcard = () => {
     const [volunteer, setVolunTeers] = useState([])
         useEffect(() => {
         const getData = async () => {
-        const { data } = await axios(`http://localhost:5000/all-vols?page=${current}&size=${ipages}&filter=${filter}&search=${search}`)
+        const { data } = await axios(`https://volunteer-server-beta.vercel.app/all-vols?page=${current}&size=${ipages}&filter=${filter}&search=${search}`)
         setVolunTeers(data)
         
         }
@@ -29,7 +29,7 @@ const Allcard = () => {
         
         useEffect(() => {
         const getSum = async () => {
-        const { data } = await axios(`http://localhost:5000/vol-sum?filter=${filter}&search=${search}`)
+        const { data } = await axios(`https://volunteer-server-beta.vercel.app/vol-sum?filter=${filter}&search=${search}`)
         
         setsum(data.sum)
         }

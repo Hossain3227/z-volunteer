@@ -22,7 +22,7 @@ const Mypost = () => {
 
     const getData = async () => {
       console.log(user?.email);
-      const {data} = await axios(`http://localhost:5000/volunteers/${user?.email}`)
+      const {data} = await axios(`https://volunteer-server-beta.vercel.app/volunteers/${user?.email}`)
       setvolunteer(data)
 
   }
@@ -32,7 +32,7 @@ const Mypost = () => {
 
     const handleDelete = async id => {
       try {
-        const { data } = await axios.delete(`http://localhost:5000/volunteer/${id}`)
+        const { data } = await axios.delete(`https://volunteer-server-beta.vercel.app/volunteer/${id}`)
         console.log(data)
         toast.success('Deleted')
   

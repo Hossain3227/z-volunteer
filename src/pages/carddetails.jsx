@@ -50,7 +50,7 @@ const Carddetails = () => {
     }
 
     try{
-        const {data} = await axios.post('http://localhost:5000/requests',requestData)
+        const {data} = await axios.post('https://volunteer-server-beta.vercel.app/requests',requestData)
         console.log(data);
         toast.success('requested')
         navigate('/my-req')

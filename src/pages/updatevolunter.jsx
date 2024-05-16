@@ -54,7 +54,7 @@ const Updatevolunter = () => {
             }
             try {
               const { data } = await axios.put(
-                `http://localhost:5000/volunteer/${_id}`,
+                `https://volunteer-server-beta.vercel.app/volunteer/${_id}`,
                 volunteerData
               )
               console.log(data)
