@@ -8,19 +8,20 @@ const Allcard = () => {
      
     // const volunteer = useLoaderData();
 
-    const [ipages,setipages] = useState(1)
+    const [ipages,setipages] = useState(6)
     const[sum,setsum] = useState(0)
     const [current,setcurrent] = useState(1)
+    const [filter,setfilter] = useState('')
     
     const [volunteer, setVolunTeers] = useState([])
         useEffect(() => {
         const getData = async () => {
-        const { data } = await axios(`http://localhost:5000/all-vols?page=${current}&size=${ipages}`)
+        const { data } = await axios(`http://localhost:5000/all-vols?page=${current}&size=${ipages}&filter=${filter}`)
         setVolunTeers(data)
         
         }
         getData()
-        }, [current,ipages])
+        }, [current,filter,ipages])
 
 
         
@@ -50,9 +51,11 @@ const Allcard = () => {
                 <div className="my-10">
 
                 <select
+                onChange={e => setfilter(e.target.value)}
                 name='Category'
                 id='Category'
                 className='border p-2 rounded-md'
+                value={filter}
               >
                 <option value=''>Category wise filter</option>
                 <option value='education'>education</option>
@@ -80,7 +83,7 @@ const Allcard = () => {
             <div className="flex items-center justify-center mt-10 gap-6">
                 <div className=" ">
 
-                <button className="btn">
+                <button disabled={current === 1} onClick={() => handlePages(current - 1)} className="btn">
                     Previous
                 </button>
                 </div>
@@ -90,7 +93,7 @@ const Allcard = () => {
                 <button
                 onClick={() => handlePages(btnNum)}
                 key={btnNum}
-                className={`hidden px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-red-400  hover:text-white`}
+                className={`hidden ${current === btnNum? 'bg-red-400 text-white':''} px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-red-400  hover:text-white`}
                 >
                 {btnNum}
                 </button>
@@ -98,7 +101,7 @@ const Allcard = () => {
                 </div>
 
                 <div>
-                    <button className="btn">
+                    <button disabled={current === pageNum} onClick={() => handlePages(current + 1)} className="btn">
                         next
                     </button>
                 </div>
