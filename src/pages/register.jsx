@@ -9,8 +9,9 @@ const Register = () => {
 
 	const navigate = useNavigate();
 const {logInWithGoogle, createUser, UserProfileUpdate, user, setUser } = useContext(AuthContext);
-const from = location.state || '/'
 const location = useLocation()
+const from = location.state || '/'
+
 
 const handleSignUp = async e => {
 	e.preventDefault()
@@ -22,6 +23,25 @@ const handleSignUp = async e => {
 	const pass = form.password.value 
 
 	console.log({email,name,pass,photo});
+
+	const mLength = 6;
+    const capitalLetter = /[A-Z]/.test(pass);
+    const specialCharacter = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-]/.test(
+      pass
+    );
+
+    if (pass.length < mLength) {
+      toast.error("Password must be at least 6 characters long.");
+      return;
+    }
+    if (!capitalLetter) {
+      toast.error("Password must contain at least one capital letter.");
+      return;
+    }
+    if (!specialCharacter) {
+      toast.error("Password must contain at least one special character.");
+      return;
+    }
 
 		try{
 			const result = await createUser(email,pass)
