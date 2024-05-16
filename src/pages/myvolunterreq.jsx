@@ -94,7 +94,7 @@ const Myvolunterreq = () => {
 
           <th>
             
-            <button onClick={() => handleCancel(vol._id)} className="btn">Cancel</button>
+            <button onClick={() => handleCancel(vol._id)} className="btn bg-red-500 text-white">Cancel</button>
           </th>
         </tr>
         )

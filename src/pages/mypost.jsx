@@ -95,8 +95,8 @@ const Mypost = () => {
           <td>{vol.Category}</td>
 
           <th>
-            <Link to={`/update/${vol._id}`} className="btn btn-ghost btn-xs">update</Link>
-            <button onClick={() => handleDelete(vol._id)} className="btn">Delete</button>
+            <Link to={`/update/${vol._id}`} className="btn btn-ghost btn-xs text-black hover:bg-blue-500 hover:text-white">update</Link>
+            <button onClick={() => handleDelete(vol._id)} className="btn bg-red-500 text-white transform transition duration-5000 hover:bg-blue-500">Delete</button>
           </th>
         </tr>
         )

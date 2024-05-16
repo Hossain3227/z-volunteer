@@ -96,7 +96,7 @@ const Allcard = () => {
 
                 <div>
 
-                <button onClick={handleReset} className="btn">reset</button>
+                <button onClick={handleReset} className="btn btn-primary">reset</button>
                 </div>
               
                 </div>
@@ -117,7 +117,7 @@ const Allcard = () => {
             <div className="flex items-center justify-center mt-10 gap-6">
                 <div className=" ">
 
-                <button disabled={current === 1} onClick={() => handlePages(current - 1)} className="btn">
+                <button disabled={current === 1} onClick={() => handlePages(current - 1)} className="btn bg-red-500 text-white">
                     Previous
                 </button>
                 </div>
@@ -135,7 +135,7 @@ const Allcard = () => {
                 </div>
 
                 <div>
-                    <button disabled={current === pageNum} onClick={() => handlePages(current + 1)} className="btn">
+                    <button disabled={current === pageNum} onClick={() => handlePages(current + 1)} className="btn bg-red-500 text-white">
                         next
                     </button>
                 </div>

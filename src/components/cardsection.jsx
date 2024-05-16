@@ -20,7 +20,7 @@ const Cardsection = ({volunteer}) => {
     return (
         <div className="my-12">
 
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center mb-6">
             <h1 className="text-5xl font-bold">Recent Volunteer Events</h1>
             <p className="text-[18px]"> Join the events quickly </p>
             </div>

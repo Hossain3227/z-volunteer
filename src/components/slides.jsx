@@ -8,7 +8,7 @@ const Slides = ({image,text,ptext}) => {
     <div className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">{text}</h1>
       <p className="mb-5 text-[20px]">{ptext}</p>
-      <button className="btn btn-primary">Get Started</button>
+      <button className="btn btn-primary bg-transparent">Get Started</button>
     </div>
   </div>
 </div>
