@@ -8,24 +8,39 @@ const Allcard = () => {
      
     // const volunteer = useLoaderData();
 
-    const [ipages,setipages] = useState(2)
+    const [ipages,setipages] = useState(1)
     const[sum,setsum] = useState(0)
+    const [current,setcurrent] = useState(1)
     
     const [volunteer, setVolunTeers] = useState([])
         useEffect(() => {
         const getData = async () => {
-        const { data } = await axios('http://localhost:5000/volunteer')
+        const { data } = await axios(`http://localhost:5000/all-vols?page=${current}&size=${ipages}`)
         setVolunTeers(data)
-        setsum(data.length)
+        
         }
         getData()
+        }, [current,ipages])
+
+
+        
+        useEffect(() => {
+        const getSum = async () => {
+        const { data } = await axios('http://localhost:5000/vol-sum')
+        
+        setsum(data.sum)
+        }
+        getSum()
         }, [])
 
 
-
-
-        const pages =  [...Array(sum/ipages).keys()].map(element => element + 1)
-
+        const pageNum =  Math.ceil(sum/ipages)
+        const pages =  [...Array(pageNum).keys()].map(element => element + 1)
+ 
+        const handlePages = (value) =>{
+            console.log(value);
+            setcurrent(value)
+        }
     return (
         <div>
             <h2>All Card items: {volunteer.length} </h2>
@@ -73,7 +88,7 @@ const Allcard = () => {
                     
                 {pages.map(btnNum => (
                 <button
-                // onClick={() => handlePaginationButton(btnNum)}
+                onClick={() => handlePages(btnNum)}
                 key={btnNum}
                 className={`hidden px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-red-400  hover:text-white`}
                 >
