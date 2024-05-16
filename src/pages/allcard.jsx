@@ -12,27 +12,29 @@ const Allcard = () => {
     const[sum,setsum] = useState(0)
     const [current,setcurrent] = useState(1)
     const [filter,setfilter] = useState('')
+    const [search,setsearch] = useState([])
+    const [sText,setsText] = useState('')
     
     const [volunteer, setVolunTeers] = useState([])
         useEffect(() => {
         const getData = async () => {
-        const { data } = await axios(`http://localhost:5000/all-vols?page=${current}&size=${ipages}&filter=${filter}`)
+        const { data } = await axios(`http://localhost:5000/all-vols?page=${current}&size=${ipages}&filter=${filter}&search=${search}`)
         setVolunTeers(data)
         
         }
         getData()
-        }, [current,filter,ipages])
+        }, [current,filter,ipages,search])
 
 
         
         useEffect(() => {
         const getSum = async () => {
-        const { data } = await axios('http://localhost:5000/vol-sum')
+        const { data } = await axios(`http://localhost:5000/vol-sum?filter=${filter}&search=${search}`)
         
         setsum(data.sum)
         }
         getSum()
-        }, [])
+        }, [filter,search])
 
 
         const pageNum =  Math.ceil(sum/ipages)
@@ -42,16 +44,31 @@ const Allcard = () => {
             console.log(value);
             setcurrent(value)
         }
+
+        const handleReset = () =>{
+            setfilter('')
+            setsearch('')
+            setsText('')
+        }
+
+        const handleSearch = e =>{
+            e.preventDefault()
+            // const text = e.target.search.value 
+            setsearch(sText)
+        }
+
     return (
         <div>
             <h2>All Card items: {volunteer.length} </h2>
 
             <div className="flex items-center justify-center gap-4"> 
 
-                <div className="my-10">
+                <div className="flex my-10 gap-4">
 
                 <select
-                onChange={e => setfilter(e.target.value)}
+                onChange={e => {setfilter(e.target.value)
+                 setcurrent(1)
+                }}
                 name='Category'
                 id='Category'
                 className='border p-2 rounded-md'
@@ -65,6 +82,23 @@ const Allcard = () => {
                 <option value='environmental conservation'>environmental conservation</option>
                 <option value='community development'>Community development</option>
               </select>
+                <form onSubmit={handleSearch}>
+                <div>
+              <label className="input input-bordered flex items-center gap-2">
+              <input type="text" onChange={e => setsText(e.target.value)}
+              value={sText}
+              className="grow" placeholder="Search" name="search" />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path        fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+              </label>
+              </div>
+                </form>
+              
+
+                <div>
+
+                <button onClick={handleReset} className="btn">reset</button>
+                </div>
+              
                 </div>
             </div>
 
