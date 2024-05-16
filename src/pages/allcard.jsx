@@ -8,11 +8,15 @@ const Allcard = () => {
      
     // const volunteer = useLoaderData();
 
-        const [volunteer, setVolunTeers] = useState([])
+    const [ipages,setipages] = useState(2)
+    const[sum,setsum] = useState(0)
+    
+    const [volunteer, setVolunTeers] = useState([])
         useEffect(() => {
         const getData = async () => {
         const { data } = await axios('http://localhost:5000/volunteer')
         setVolunTeers(data)
+        setsum(data.length)
         }
         getData()
         }, [])
@@ -20,13 +24,13 @@ const Allcard = () => {
 
 
 
-        const pages =  [ 1, 2, 3]
+        const pages =  [...Array(sum/ipages).keys()].map(element => element + 1)
 
     return (
         <div>
             <h2>All Card items: {volunteer.length} </h2>
 
-            <div>
+            <div className="flex items-center justify-center gap-4"> 
 
                 <div className="my-10">
 
@@ -58,7 +62,7 @@ const Allcard = () => {
 
 
 
-            <div className="flex mt-10 gap-6">
+            <div className="flex items-center justify-center mt-10 gap-6">
                 <div className=" ">
 
                 <button className="btn">
